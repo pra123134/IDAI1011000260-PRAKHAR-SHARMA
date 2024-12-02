@@ -92,6 +92,56 @@ plot_line(india_medals['Year'], india_medals['Medal'], 'Performance of India Ove
 individual_data = merged_df[merged_df['region'] == 'Individual Olympic Athletes']['Medal'].value_counts()
 plot_bar(individual_data, 'Performance of Individual Olympic Athletes', 'Medal Type', 'Count')
 
+Reflections on those Graphic Chart
+1. Top 10 Countries by Gold Medals (1900–2016)
+Countries like the USA, Soviet Union, and China have won the most gold medals because they spend a lot of money on sports, have great training facilities, and scout talented athletes early. Winning also became a way to show their power during historical events like the Cold War.
+
+2. Top 10 Countries by Medals in 2024
+In 2024, countries like the USA and China stayed on top by focusing on sports they are good at, using advanced technology in training, and investing in athletes. Host countries like Japan often perform better because they prepare well and know the conditions.
+
+3. Gender Participation Over Time
+Women were first allowed to compete in the Olympics in 1900. Over the years, their participation has grown, and by Tokyo 2020, nearly the same number of men and women competed. New events for women, like boxing in 2012, show how the games are becoming more equal.
+
+4. Sports Count Over Time
+The Olympics have changed a lot over time. Some sports, like skateboarding and surfing, were added in recent years because they are popular with younger audiences. Others, like tug-of-war, were removed because they became less popular.
+
+5. Age Distribution of Gold Medallists
+Different sports have different "best ages." For example:
+Gymnasts are often teenagers when they win. In sports like shooting or horse riding, athletes can win even in their 30s or 40s.Some athletes, like swimmer Dara Torres, have even won medals in their 40s!
+
+6. Average Height of Athletes Over Time
+Athletes' height depends on their sport. For example:
+Swimmers and basketball players have gotten taller over the years. Gymnasts are usually shorter because it helps them move quickly and perform tricks.
+
+7. India’s Performance Over Time
+India has struggled at the Olympics because it focused less on sports like athletics or swimming. However, the country is improving in sports like shooting, badminton, and hockey. Programs like Target Olympic Podium Scheme are helping Indian athletes perform better.
+
+8. Performance of Individual Athletes
+Some athletes compete without representing a country, like refugees. They often face big challenges, like not having proper training or funding. Their stories, like swimmer Yusra Mardini’s, inspire many because they show resilience and determination.
+
+Future Use Cases
+Policy and Investment
+·         Supporting Future Stars:
+Governments can use data to decide which sports to fund more, especially those with great potential to win medals in the future.
+·         Adding New Sports:
+By checking trends, countries can decide which new sports to introduce or promote.
+
+ Event Planning
+·         Fun for Everyone:
+Sports organizers can design events that involve both boys and girls equally, making sure everyone has a chance to shine.
+·         Predicting Wins:
+Using trends, countries can guess how many medals they might win in the next Olympics and plan goals around that.
+Technological Advancements
+·         Smart Predictions:
+With tools like machine learning, coaches and planners can predict which athletes might succeed and prepare them even better.
+
+
+ 
+ 
+ 
+
+
+
 
 
 
