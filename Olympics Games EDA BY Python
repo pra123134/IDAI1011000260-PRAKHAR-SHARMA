@@ -1,0 +1,104 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load datasets
+athlete_events_path = r'C:\Users\Asus\Downloads\Dataset For Olympic Games Analysis-20241121T033651Z-001\Dataset For Olympic Games Analysis\athlete_events.csv'
+noc_regions_path = r'C:\Users\Asus\Downloads\Dataset For Olympic Games Analysis-20241121T033651Z-001\Dataset For Olympic Games Analysis\noc_regions.csv'
+olympics2024_path = r'C:\Users\Asus\Downloads\Dataset For Olympic Games Analysis-20241121T033651Z-001\Dataset For Olympic Games Analysis\olympics2024.csv'
+
+athlete_data = pd.read_csv(athlete_events_path)
+noc_data = pd.read_csv(noc_regions_path)
+olympics2024_data = pd.read_csv(olympics2024_path)
+
+# Merge data
+merged_df = athlete_data.merge(noc_data, on='NOC', how='left')
+
+# Helper function for bar plots
+def plot_bar(data, title, xlabel, ylabel, color='gold', rotation=45, figsize=(10, 6)):
+    plt.figure(figsize=figsize)
+    data.plot(kind='bar', color=color, edgecolor='black')
+    plt.title(title, fontsize=14)
+    plt.xlabel(xlabel, fontsize=12)
+    plt.ylabel(ylabel, fontsize=12)
+    plt.xticks(rotation=rotation)
+    plt.tight_layout()
+    plt.show()
+
+# Helper function for line plots
+def plot_line(x, y, title, xlabel, ylabel, color='blue', marker='o', grid=True, rotation=45, figsize=(12, 6)):
+    plt.figure(figsize=figsize)
+    plt.plot(x, y, marker=marker, color=color, label=ylabel)
+    plt.title(title, fontsize=14)
+    plt.xlabel(xlabel, fontsize=12)
+    plt.ylabel(ylabel, fontsize=12)
+    if grid:
+        plt.grid(True, linestyle='--', alpha=0.6)
+    plt.xticks(rotation=rotation)
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
+# 1. Top 10 Countries by Gold Medals (1900-2016)
+gold_medals = merged_df[merged_df['Medal'] == 'Gold']
+top_gold_countries = gold_medals['region'].value_counts().head(10)
+plot_bar(top_gold_countries, 'Top 10 Countries with Most Gold Medals (1900-2016)', 'Countries', 'Number of Gold Medals')
+
+# 2. Top 10 Countries by Medals in 2024
+for medal_type in ['Gold', 'Silver', 'Bronze', 'Total']:
+    top_countries = olympics2024_data.groupby('Country')[medal_type].sum().sort_values(ascending=False).head(10)
+    plot_bar(top_countries, f'Top 10 Countries with Most {medal_type} Medals in 2024', 'Countries', f'Number of {medal_type} Medals')
+
+# 3. Gender Participation Over Time
+gender_distribution = merged_df.groupby(['Year', 'Sex'])['Name'].count().unstack()
+gender_distribution.plot(kind='line', marker='o', figsize=(12, 6))
+plt.title('Gender Participation in Olympic Games')
+plt.xlabel('Year')
+plt.ylabel('Number of Athletes')
+plt.legend(title='Gender')
+plt.tight_layout()
+plt.show()
+
+# 4. Sports Count Over Time
+sports_count = merged_df.groupby('Year')['Sport'].nunique()
+plot_line(sports_count.index, sports_count.values, 'Number of Sports Held Over Time', 'Year', 'Number of Sports')
+
+# 5. Age Distribution of Gold Medalists
+gold_medalists = merged_df[merged_df['Medal'] == 'Gold']
+plt.figure(figsize=(10, 6))
+sns.histplot(gold_medalists['Age'], bins=30, kde=True, color='gold')
+plt.title('Age Distribution of Gold Medalists', fontsize=14)
+plt.xlabel('Age', fontsize=12)
+plt.ylabel('Frequency', fontsize=12)
+plt.tight_layout()
+plt.show()
+
+# 6. Average Height of Male and Female Athletes Over Years
+avg_height = merged_df.groupby(['Year', 'Sex'])['Height'].mean().unstack()
+avg_height.plot(kind='line', marker='o', figsize=(12, 6))
+plt.title('Average Height of Male and Female Athletes Over Years')
+plt.xlabel('Year')
+plt.ylabel('Average Height (cm)')
+plt.legend(title='Sex')
+plt.tight_layout()
+plt.show()
+
+# 7. India's Performance Over Time
+india_data = merged_df[merged_df['region'] == 'India']
+india_medals = india_data.groupby('Year')['Medal'].count().reset_index()
+plot_line(india_medals['Year'], india_medals['Medal'], 'Performance of India Over the Years', 'Year', 'Number of Medals')
+
+# 8. Individual Olympic Athletes
+individual_data = merged_df[merged_df['region'] == 'Individual Olympic Athletes']['Medal'].value_counts()
+plot_bar(individual_data, 'Performance of Individual Olympic Athletes', 'Medal Type', 'Count')
+
+
+
+
+
+
+
+
+
+
+
